@@ -1,0 +1,80 @@
+﻿@model BusinessEntities.BookingViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BookingViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartBookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartBookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndBookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndBookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MechanicId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MechanicId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

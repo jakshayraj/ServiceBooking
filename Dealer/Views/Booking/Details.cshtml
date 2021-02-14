@@ -1,0 +1,67 @@
+﻿@model BusinessEntities.BookingViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookingViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Licence Plate
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.LicencePlate)
+        </dd>
+
+        <dt>
+            Service
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.ServiceName)
+        </dd>
+
+        <dt>
+            Start Booking Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartBookingDate)
+        </dd>
+
+        <dt>
+            End Booking Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndBookingDate)
+        </dd>
+
+        <dt>
+            Mechanic
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mechanic.Name)
+        </dd>
+
+        <dt>
+            Customer
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Customer.Name)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Cancel", "Index", "Vehicles", new { @class = "btn btn-default" })
+</p>

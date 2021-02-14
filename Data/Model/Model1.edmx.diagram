@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd3f949f50c145d19cd3ef6aaf0923e5" Name="Diagram1">
+        <EntityTypeShape EntityType="VehiclesModel.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VehiclesModel.Dealer" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VehiclesModel.Mechanic" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VehiclesModel.Service" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VehiclesModel.Vehicle" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="VehiclesModel.FK__Vehicles__Custom__6FE99F9F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VehiclesModel.Booking" Width="1.5" PointX="4.875" PointY="1.375" />
+        <AssociationConnector Association="VehiclesModel.FK__Booking__Mechani__503BEA1C" />
+        <AssociationConnector Association="VehiclesModel.FK__Booking__Service__51300E55" />
+        <AssociationConnector Association="VehiclesModel.FK__Booking__Vehicle__5224328E" />
+        <EntityTypeShape EntityType="VehiclesModel.StautsOfBooking" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="VehiclesModel.FK__Booking__Status__59C55456" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

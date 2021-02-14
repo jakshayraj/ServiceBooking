@@ -1,0 +1,134 @@
+﻿@model BusinessEntities.VehicleViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-child {
+        flex: 1;
+        margin-right: 30px;
+    }
+</style>
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <div class="form-horizontal flex-container">
+        <div class="flex-child">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.LicencePlate, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.LicencePlate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LicencePlate, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="flex-child">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegistraionDate, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.RegistraionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RegistraionDate, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ChassiNo, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.ChassiNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChassiNo, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label " })
+
+                @Html.DropDownList("CustomerId", null, "-- Select customer --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LicencePlate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistraionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChassiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.vehiclelist)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicencePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistraionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChassiNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VehicleId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.VehicleId }, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.VehicleId },  new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

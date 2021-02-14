@@ -1,0 +1,151 @@
+﻿@model BusinessEntities.BookingViewModel
+
+@{
+    ViewBag.Title = "List of Bookings";
+}
+<style>
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-child {
+        flex: 1;
+        margin-right: 30px;
+    }
+</style>
+<h2>List of Bookings</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal flex-container">
+        <div class="flex-child">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label " })
+
+                @Html.DropDownList("VehicleId", null, "-- Select Vehicle --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ServiceId, htmlAttributes: new { @class = "control-label " })
+
+                @Html.DropDownList("ServiceId", null, "-- Select Service --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ServiceId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="flex-child">
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartBookingDate, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.StartBookingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartBookingDate, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndBookingDate, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.EndBookingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndBookingDate, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<br />
+
+
+@using (Html.BeginForm("Export", "Booking", FormMethod.Post))
+{
+    <input type="submit" value="Export to Excel" class="btn btn-success" />
+}
+<br />
+@using (Html.BeginForm("Index", "Booking", FormMethod.Get))
+{
+<div class="form-inline">
+    @Html.DisplayName("Start Date :")
+    @Html.TextBox("StartDate", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "MM-DD-YYYY" })
+    @Html.DisplayName("End Date :")
+    @Html.TextBox("EndDate", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "MM-DD-YYYY" })
+    <input type="submit" value="Filter" class="btn btn-primary" />
+</div>
+        }
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    Licence Plate
+                </th>
+                <th>
+                    Service
+                </th>
+                <th>
+                    Start Booking Date
+                </th>
+                <th>
+                    End Booking Date
+                </th>
+                <th>
+                    Mechanic
+                </th>
+                <th>
+                    Owner
+                </th>
+                <th>
+                    Stauts
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.bookinglist)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.LicencePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Service.ServiceName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartBookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndBookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mechanic.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.Customer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StautsOfBooking.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Change Status", "ChangeStatus", new { id = item.BookingId }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BookingId }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId }, new { @class = "btn btn-primary" })
+                        @if (item.Status != 2)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.BookingId }, new { @class = "btn btn-primary" })
+                        }
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>

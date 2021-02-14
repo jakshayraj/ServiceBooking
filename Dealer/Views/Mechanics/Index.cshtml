@@ -1,0 +1,133 @@
+﻿@model BusinessEntities.MechanicViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-child {
+        flex: 1;
+        margin-right: 30px;
+    }
+</style>
+<h2>List of Mechanic</h2>
+
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Maruti Suzuki",
+        Value = "Maruti Suzuki"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Kia",
+        Value = "Kia",
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Hyundai",
+        Value = "Hyundai",
+    });
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal flex-container">
+        <div class="flex-child">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="flex-child">
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label " })
+
+                @Html.DropDownListFor(model => model.Brand, listItems, "-- Select Status --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.mechaniclist)
+    {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MechanicId }, new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.MechanicId }, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.MechanicId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
